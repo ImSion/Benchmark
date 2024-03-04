@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background-image: url(assets/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 40px;
+}
+
+
+.logoimg {
+    width: 160px;
+    margin-bottom: 50px;
+}
+
+.Instructions {
+    width: 600px;
+}
+
+.Instructions h1 {
+    font-size: 90px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.Instructions h3 {
+    color: #C2128D;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.Instructions p {
+    color: white;
+    margin-bottom: 40px;
+}
+
+ul {
+    margin-left: 22px;
+    color: white;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+
+#boxsect {
+    width: 800px;
+    color: white;
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+#proceedBtn {
+    width: 220px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 750;
+    background-color: #00FFFF;
+    border: none;
+    box-shadow: 1px 1px 40px #00FFFF;
+}
