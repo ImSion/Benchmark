@@ -20,6 +20,15 @@ main {
     align-items: center;
 }
 
+#main2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 80px;
+}
+
 #header2 {
     display: flex;
     justify-content: space-between;
@@ -31,7 +40,7 @@ main {
     
 }
 
-#contare {
+#timer{
     font-size: 8px;
     display: flex;
     flex-direction: column;
@@ -69,6 +78,12 @@ main {
     margin: 5px 25px;
     background-color: transparent;
     border-radius: 25px;
+    cursor: pointer;
+}
+
+.answer:hover {
+    background-color: #C2128D;
+
 }
 
 footer{
@@ -145,12 +160,14 @@ ul li {
     font-weight: 750;
     background-color: #00FFFF;
     border: none;
-    box-shadow: 1px 1px 40px #00FFFF;
+    box-shadow: 0px 0px 40px #00FFFF;
     cursor: pointer;
     margin-left: 100px;
 }
 
-
+#proceedBtn:hover {
+    box-shadow: 0px 0px 70px #00FFFF;
+}
 
 .fa-solid {
     border: 2px solid white;
