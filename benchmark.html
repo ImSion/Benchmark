@@ -8,6 +8,8 @@
   </head>
 
   <body>
+
+    <!-- header contenente logo e timer -->
     <header id="header2">
       <nav>
         <div>
@@ -15,28 +17,28 @@
         </div>
       </nav>
       
-      <!--Seconda pagina-->
-    <div id="contare">
+      <!--timer-->
+    <div id="timer">
     <p>SECONDS</p>   
     <p id="countdown">30</p>
     <P>REMAINING</P>
     </div>
-    <!--Seconda pagina-->
-    </header>
 
-    <main>
-        <h1 id="question">What does CPU stand for?</h1>
+    </header>
+    
+    <!--Questionario-->
+    <main  id="main2">
+        <h1 id="question"></h1>
 
         <form id="form">
-            
-            <button class="answer">Central Processing Unit</button>
-            <button class="answer">Central Processor Unit</button>
-            <button class="answer">Central Process Unit</button>
-            <button class="answer">Computer Personal Unit</button>
-
+            <button id="answer1" class="answer"></button>
+            <button id="answer2" class="answer"></button>
+            <button id="answer3" class="answer"></button>
+            <button id="answer4" class="answer"></button>
         </form>
 
-        <footer>
+        <!-- contatore domande -->
+        <footer id="questioncounter">
             QUESTION 1<p>/10</p>
         </footer>
     

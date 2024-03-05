@@ -136,7 +136,7 @@ function check() {
 
 function procedi() {
     if (verifica) {
-        location.href = "index.html";
+        location.href = "benchmark.html";
 
     } else {
         alert("You must click on the checkBox before moving forward")
