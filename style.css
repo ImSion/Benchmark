@@ -10,12 +10,20 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     padding: 40px;
+   
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .logoimg {
     width: 160px;
     margin-bottom: 50px;
+    
 }
 
 .Instructions {
@@ -23,6 +31,7 @@ body {
 }
 
 .Instructions h1 {
+    font-weight: 100;
     font-size: 90px;
     color: white;
     margin-bottom: 30px;
@@ -50,12 +59,17 @@ ul li {
 
 
 #boxsect {
-    width: 800px;
+    width: 950px;
     color: white;
     margin-top: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#checkdiv {
+    width: 500px;
+    margin-left: 170px;
 }
 
 
@@ -67,4 +81,6 @@ ul li {
     background-color: #00FFFF;
     border: none;
     box-shadow: 1px 1px 40px #00FFFF;
+    cursor: pointer;
+    margin-left: 100px;
 }
