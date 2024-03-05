@@ -142,3 +142,19 @@ function procedi() {
         alert("You must click on the checkBox before moving forward")
     }
 }
+
+
+
+for (let i = 0; i < questions.length; i++) {
+  let domanda = document.getElementById("question");
+  domanda.innerHTML = questions[i].question;
+
+
+  for (let k = 0; k < questions.incorrect_answers.length + questions.correct_answer.length ; k++) {
+    let form = document.getElementById("form")
+    let bottoneRisposta = document.createElement("button")
+    let risposta = form.appendChild(bottoneRisposta)
+  
+  }
+
+};
