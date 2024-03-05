@@ -13,6 +13,14 @@ body {
    
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -53,7 +61,6 @@ header {
 #form {
     width: 650px;
     height: 150px;
-    margin-left: 24%;
 }
 
 .answer{
