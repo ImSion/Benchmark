@@ -289,7 +289,8 @@ function domande(){
   //verifico se ho altre domande da inserire
   if(counter === questions.length){
     let question = document.getElementById("question");
-    question.innerHTML = "Esame finito, il tuo risultato è di: " + score + " risposte esatte su " + counter;
+    //question.innerHTML = "Esame finito, il tuo risultato è di: " + score + " risposte esatte su " + counter;
+    question.innerHTML = (score * 100)/counter + "%";
     //console.log("esame finito");
     let timer = document.getElementById("timer")
     timer.remove();
