@@ -131,7 +131,9 @@ main {
 #question {
     color: white;
     text-align: center;
-    margin: 50px;
+    margin: 30px;
+    height: 200px;
+    width: 700px;
 }
 
 #form {
@@ -144,7 +146,7 @@ main {
     width: 250px;
     height: 50px;
     margin: 5px 25px;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.534);
     border-radius: 25px;
     cursor: pointer;
 }
