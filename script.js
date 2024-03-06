@@ -343,15 +343,6 @@ function domande(){
       }
     })
   }
-  //console.log(`sei alla domanda numero ` + (counter + 1) + ` e il tuo punteggio è di ` + score + ` risposte esatte`);
-  //console.log(counter);
   countdown();
 }
 domande();
-
-// function incremento(){
-//   //console.log(bottoni);
-//   counter++;
-//   contdwon()
-//   domande();
-// }
