@@ -98,38 +98,45 @@ const questions = [
     },
   ];
 
+  
+//variabile per le domande
+let counter = 0; 
 
-// timer 
-const FULL_DASH_ARRAY = 283;
-// impostiamo i secondi in cui cambia colore e diventa arancione per il warning
-const WARNING_THRESHOLD = 15;
-// impostiamo i secondi in cui cambia colore e diventa rosso per l'alert
-const ALERT_THRESHOLD = 7;
+//variabile per il punteggio
+let score = 0;
 
-//settiamo le costanti colore divise per info (lightblu), warning (arancione) e alert(rosso)
-const COLOR_CODES = {
-  info: {
-    color: "blu"
-  },
-  warning: {
-    color: "orange",
-    threshold: WARNING_THRESHOLD
-  },
-  alert: {
-    color: "red",
-    threshold: ALERT_THRESHOLD
-  }
-};
+function countdown() {
+  // timer 
+  const FULL_DASH_ARRAY = 283;
+  // impostiamo i secondi in cui cambia colore e diventa arancione per il warning
+  const WARNING_THRESHOLD = 15;
+  // impostiamo i secondi in cui cambia colore e diventa rosso per l'alert
+  const ALERT_THRESHOLD = 7;
 
-//settiamo il timer e le relative funzioni di richiamo colore in base al tempo rimanente
-const TIME_LIMIT = 30;
-let timePassed = 0;
-let timeLeft = TIME_LIMIT;
-let timerInterval = null;
-let remainingPathColor = COLOR_CODES.info.color;
+  //settiamo le costanti colore divise per info (lightblu), warning (arancione) e alert(rosso)
+  const COLOR_CODES = {
+    info: {
+      color: "blu"
+    },
+    warning: {
+      color: "orange",
+      threshold: WARNING_THRESHOLD
+    },
+    alert: {
+      color: "red",
+      threshold: ALERT_THRESHOLD
+    }
+  };
 
-//creiamo gli elementi html all'interno del div "timer"
-document.getElementById("timer").innerHTML = `
+  //settiamo il timer e le relative funzioni di richiamo colore in base al tempo rimanente
+  const TIME_LIMIT = 30;
+  let timePassed = 0;
+  let timeLeft = TIME_LIMIT;
+  let timerInterval = null;
+  let remainingPathColor = COLOR_CODES.info.color;
+
+  //creiamo gli elementi html all'interno del div "timer"
+  document.getElementById("timer").innerHTML = `
 <div class="base-timer">
   <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <g class="base-timer__circle">
@@ -156,85 +163,89 @@ document.getElementById("timer").innerHTML = `
 </div>
 `;
 
-startTimer();
+  startTimer();
 
-function onTimesUp() {
-  clearInterval(timerInterval);
-}
+  function onTimesUp() {
+    clearInterval(timerInterval);
+  }
 
-// impostiamo la funzione startimer
-function startTimer() {
-  timerInterval = setInterval(() => {
-    timePassed = timePassed += 1;
-    timeLeft = TIME_LIMIT - timePassed;
-    document.getElementById("base-timer-label").innerHTML = formatTime(
-      timeLeft
-    );
-    setCircleDasharray();
-    setRemainingPathColor(timeLeft);
+  // impostiamo la funzione startimer
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      timePassed = timePassed += 1;
+      timeLeft = TIME_LIMIT - timePassed;
+      document.getElementById("base-timer-label").innerHTML = formatTime(
+        timeLeft
+      );
+      setCircleDasharray();
+      setRemainingPathColor(timeLeft);
 
-    if (timeLeft === 0) {
-      onTimesUp();
+      if (timeLeft === 0) {
+        onTimesUp();
+      }
+    }, 1000);
+  }
+
+  function formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
     }
-  }, 1000);
-}
 
-function formatTime(time) {
-  const minutes = Math.floor(time / 60);
-  let seconds = time % 60;
-
-  if (seconds < 10) {
-    seconds = `0${seconds}`;
+    return `${seconds}`;
   }
 
-  return `${seconds}`;
-}
+  // settiamo il path che ci consente che il colore della barra cambi a seconda dello stato del timer
+  // se è ancora in zona "info" sarà azzura, in zona "warning" diventerà arancione e in zona "alert" rossa
+  // i colori vengono richiamati dai rispettivi id e dalle rispettive classi css collegate alla costante COLOR_CODES
+  function setRemainingPathColor(timeLeft) {
+    const {
+      alert,
+      warning,
+      info
+    } = COLOR_CODES;
+    if (timeLeft <= alert.threshold) {
+      document
+        .getElementById("base-timer-path-remaining")
+        .classList.remove(warning.color);
+      document
+        .getElementById("base-timer-path-remaining")
+        .classList.add(alert.color);
+    } else if (timeLeft <= warning.threshold) {
+      document
+        .getElementById("base-timer-path-remaining")
+        .classList.remove(info.color);
+      document
+        .getElementById("base-timer-path-remaining")
+        .classList.add(warning.color);
+    }
+  }
 
-// settiamo il path che ci consente che il colore della barra cambi a seconda dello stato del timer
-// se è ancora in zona "info" sarà azzura, in zona "warning" diventerà arancione e in zona "alert" rossa
-// i colori vengono richiamati dai rispettivi id e dalle rispettive classi css collegate alla costante COLOR_CODES
-function setRemainingPathColor(timeLeft) {
-  const {
-    alert,
-    warning,
-    info
-  } = COLOR_CODES;
-  if (timeLeft <= alert.threshold) {
+  function calculateTimeFraction() {
+    const rawTimeFraction = timeLeft / TIME_LIMIT;
+    return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+  }
+
+  function setCircleDasharray() {
+    const circleDasharray = `${(
+      calculateTimeFraction() * FULL_DASH_ARRAY
+    ).toFixed(0)} 283`;
     document
       .getElementById("base-timer-path-remaining")
-      .classList.remove(warning.color);
-    document
-      .getElementById("base-timer-path-remaining")
-      .classList.add(alert.color);
-  } else if (timeLeft <= warning.threshold) {
-    document
-      .getElementById("base-timer-path-remaining")
-      .classList.remove(info.color);
-    document
-      .getElementById("base-timer-path-remaining")
-      .classList.add(warning.color);
+      .setAttribute("stroke-dasharray", circleDasharray);
   }
 }
 
-function calculateTimeFraction() {
-  const rawTimeFraction = timeLeft / TIME_LIMIT;
-  return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
-}
+// Aggiorna il conto alla rovescia ogni secondo
 
-function setCircleDasharray() {
-  const circleDasharray = `${(
-    calculateTimeFraction() * FULL_DASH_ARRAY
-  ).toFixed(0)} 283`;
-  document
-    .getElementById("base-timer-path-remaining")
-    .setAttribute("stroke-dasharray", circleDasharray);
-}
-//fine timer
 
+console.log(counter);
 
 let verifica= false;
 let boxCheck = document.querySelector(".fa-solid") 
-boxCheck.style.color= "transparent"
+//boxCheck.style.color= "transparent"
 function check() {  
     if(boxCheck.style.color =="transparent") {  //controlla se non è stato impostato un colore
         boxCheck.style.color = "green" //se non è stato impostato allora metti questo
@@ -255,17 +266,84 @@ function procedi() {
 }
 
 
+//Box per le domande
 
-for (let i = 0; i < questions.length; i++) {
-  let domanda = document.getElementById("question");
-  domanda.innerHTML = questions[i].question;
-
-
-  for (let k = 0; k < questions.incorrect_answers.length + questions.correct_answer.length ; k++) {
-    let form = document.getElementById("form")
-    let bottoneRisposta = document.createElement("button")
-    let risposta = form.appendChild(bottoneRisposta)
-  
+//per selezionare una domanda, utilizzeremo una variabile che, quando scade il tempo o quando l'utente darà una risposta, aumenterà. Questa varibaile sarà l'indice del nostro array, di conseguenza non avremo bisogno dei for per ciclare le domande. Può essere usata (aggiungendo + 1), per mostrare a quale domanda siamo (prima, seconda, ecc...)
+function domande(){
+  countdown();
+  //rimuovo le vecchie risposte
+  let btnContainer = document.getElementById("form")
+  while(btnContainer.firstChild){
+    btnContainer.removeChild(btnContainer.firstChild)
   }
 
-};
+  //verifico se ho altre domande da inserire
+  if(counter === questions.length){
+    let question = document.getElementById("question");
+    question.innerHTML = "Esame finito, il tuo risultato è di: " + score + " risposte esatte su " + counter;
+    //console.log("esame finito");
+    return;
+  }
+
+  //prendo la domanda
+  let domanda = document.getElementById("question");
+  domanda.innerHTML = questions[counter].question;
+
+  //facciamo un array con le risposte al suo interno
+  let risposte = [];
+
+  //controllo per vedere se esistono più risposte corrette, NB: nelle correct answer viene passata una stringa, non un array di stringhe. Ciò accade solo per le incorrect answer, perciò dobbiamo prendere per certo che la risposta esatta sia solo una.
+  // if(questions[counter].correct_answer.length < 1) {
+  //   for(let i = 0; i < questions[counter].correct_answer.length; i++) {
+  //     risposte.push(questions[counter].correct_answer[i]);
+  //   }
+  // } else {
+  //   risposte.push(questions[counter].correct_answer);
+  // }
+
+  risposte.push(questions[counter].correct_answer);
+
+  for(let i = 0; i < questions[counter].incorrect_answers.length; i++) {
+    risposte.push(questions[counter].incorrect_answers[i]);
+  }
+
+  //console.log(risposte);
+
+  //creo e aggiungo al div delle answer, i vari bottoni con le varie risposte
+  let container = document.getElementById("form"); 
+  for(let i = 0; i < risposte.length; i++) {
+    let bottone = document.createElement("button");
+    bottone.textContent = risposte[i];
+    bottone.classList.add("answer");
+    container.appendChild(bottone);
+  }
+  let buttons = document.getElementsByClassName("answer");
+  for(let i = 0; i < buttons.length; i++){
+    buttons[i].addEventListener(`click`, function(){
+      let button = buttons[i].textContent;
+      //console.log(button);
+      if(button === questions[counter].correct_answer){
+        counter++;
+        score++;
+        domande();
+      }else {
+        counter++;
+        domande()
+      }
+    })
+  }
+  //console.log(`sei alla domanda numero ` + (counter + 1) + ` e il tuo punteggio è di ` + score + ` risposte esatte`);
+  //console.log(counter);
+  countdown();
+}
+
+function avvia(){
+  domande();
+}
+
+// function incremento(){
+//   //console.log(bottoni);
+//   counter++;
+//   contdwon()
+//   domande();
+// }
