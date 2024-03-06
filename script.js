@@ -101,10 +101,12 @@ const questions = [
 
 // timer 
 const FULL_DASH_ARRAY = 283;
+// impostiamo i secondi in cui cambia colore e diventa arancione per il warning
 const WARNING_THRESHOLD = 15;
+// impostiamo i secondi in cui cambia colore e diventa rosso per l'alert
 const ALERT_THRESHOLD = 7;
 
-//settiamo le costanti colore
+//settiamo le costanti colore divise per info (lightblu), warning (arancione) e alert(rosso)
 const COLOR_CODES = {
   info: {
     color: "blu"
@@ -119,12 +121,14 @@ const COLOR_CODES = {
   }
 };
 
+//settiamo il timer e le relative funzioni di richiamo colore in base al tempo rimanente
 const TIME_LIMIT = 30;
 let timePassed = 0;
 let timeLeft = TIME_LIMIT;
 let timerInterval = null;
 let remainingPathColor = COLOR_CODES.info.color;
 
+//creiamo gli elementi html all'interno del div "timer"
 document.getElementById("timer").innerHTML = `
 <div class="base-timer">
   <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -158,6 +162,7 @@ function onTimesUp() {
   clearInterval(timerInterval);
 }
 
+// impostiamo la funzione startimer
 function startTimer() {
   timerInterval = setInterval(() => {
     timePassed = timePassed += 1;
@@ -182,7 +187,7 @@ function formatTime(time) {
     seconds = `0${seconds}`;
   }
 
-  return `${minutes}:${seconds}`;
+  return `${seconds}`;
 }
 
 // settiamo il path che ci consente che il colore della barra cambi a seconda dello stato del timer
@@ -224,7 +229,7 @@ function setCircleDasharray() {
     .getElementById("base-timer-path-remaining")
     .setAttribute("stroke-dasharray", circleDasharray);
 }
-
+//fine timer
 
 
 let verifica= false;
