@@ -321,6 +321,7 @@ function domande(){
     risposte.push(questions[counter].incorrect_answers[i]);
   }
 
+  //randomizzo la disposizione delle risposte mischiando il contenuto dell'array
   risposte.sort(() => Math.random()- 0.5);
 
   //console.log(risposte);
