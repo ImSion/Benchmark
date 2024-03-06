@@ -291,6 +291,10 @@ function domande(){
     let question = document.getElementById("question");
     question.innerHTML = "Esame finito, il tuo risultato è di: " + score + " risposte esatte su " + counter;
     //console.log("esame finito");
+    let timer = document.getElementById("timer")
+    timer.remove();
+    let footer1 = document.getElementById("questioncounter");
+    footer1.remove();
     return;
   }
 
@@ -343,6 +347,8 @@ function domande(){
       }
     })
   }
+  let footer1 = document.getElementById("questioncounter");
+  footer1.innerHTML = "QUESTION " + (counter+1) + "/10"
   countdown();
 }
 domande();
