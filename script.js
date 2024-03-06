@@ -98,26 +98,132 @@ const questions = [
     },
   ];
 
-  
 
+// timer 
+const FULL_DASH_ARRAY = 283;
+const WARNING_THRESHOLD = 15;
+const ALERT_THRESHOLD = 7;
 
-// seconda pagina
-var seconds = 29;
-
-// Aggiorna il conto alla rovescia ogni secondo
-var countdownFunction = setInterval(function() {
-  // Visualizza il conto alla rovescia nell'elemento con id "countdown"
-  document.getElementById("countdown").textContent = seconds;
-  
-  // Decrementa il valore di "seconds"
-  seconds--;
-  
-  // Se il conto alla rovescia è terminato, visualizza un messaggio
-  if (seconds < 0) {
-    clearInterval(countdownFunction);
-    document.getElementById("countdown").textContent = "0";
+//settiamo le costanti colore
+const COLOR_CODES = {
+  info: {
+    color: "blu"
+  },
+  warning: {
+    color: "orange",
+    threshold: WARNING_THRESHOLD
+  },
+  alert: {
+    color: "red",
+    threshold: ALERT_THRESHOLD
   }
-}, 1000);
+};
+
+const TIME_LIMIT = 30;
+let timePassed = 0;
+let timeLeft = TIME_LIMIT;
+let timerInterval = null;
+let remainingPathColor = COLOR_CODES.info.color;
+
+document.getElementById("timer").innerHTML = `
+<div class="base-timer">
+  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g class="base-timer__circle">
+      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+      <path
+        id="base-timer-path-remaining"
+        stroke-dasharray="283"
+        class="base-timer__path-remaining ${remainingPathColor}"
+        d="
+          M 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+      ></path>
+    </g>
+  </svg>
+  <span id="seconds"> seconds </span>
+  
+  <span id="base-timer-label" class="base-timer__label"> ${formatTime(
+    timeLeft
+  )}</span>
+  <span id="remaining"> remaining <span>
+</div>
+`;
+
+startTimer();
+
+function onTimesUp() {
+  clearInterval(timerInterval);
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timePassed = timePassed += 1;
+    timeLeft = TIME_LIMIT - timePassed;
+    document.getElementById("base-timer-label").innerHTML = formatTime(
+      timeLeft
+    );
+    setCircleDasharray();
+    setRemainingPathColor(timeLeft);
+
+    if (timeLeft === 0) {
+      onTimesUp();
+    }
+  }, 1000);
+}
+
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+
+  return `${minutes}:${seconds}`;
+}
+
+// settiamo il path che ci consente che il colore della barra cambi a seconda dello stato del timer
+// se è ancora in zona "info" sarà azzura, in zona "warning" diventerà arancione e in zona "alert" rossa
+// i colori vengono richiamati dai rispettivi id e dalle rispettive classi css collegate alla costante COLOR_CODES
+function setRemainingPathColor(timeLeft) {
+  const {
+    alert,
+    warning,
+    info
+  } = COLOR_CODES;
+  if (timeLeft <= alert.threshold) {
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.remove(warning.color);
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.add(alert.color);
+  } else if (timeLeft <= warning.threshold) {
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.remove(info.color);
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.add(warning.color);
+  }
+}
+
+function calculateTimeFraction() {
+  const rawTimeFraction = timeLeft / TIME_LIMIT;
+  return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+}
+
+function setCircleDasharray() {
+  const circleDasharray = `${(
+    calculateTimeFraction() * FULL_DASH_ARRAY
+  ).toFixed(0)} 283`;
+  document
+    .getElementById("base-timer-path-remaining")
+    .setAttribute("stroke-dasharray", circleDasharray);
+}
 
 
 

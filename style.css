@@ -40,25 +40,94 @@ main {
     
 }
 
-#timer{
-    font-size: 8px;
+/* style del timer */
+.base-timer {
+    position: relative;
+    width: 130px;
+    height: 130px;
+}
+  
+.base-timer__svg {
+    transform: scaleX(1);
+}
+  
+.base-timer__circle {
+    fill: none;
+    stroke: none;
+}
+  
+.base-timer__path-elapsed {
+    stroke-width: 10px;
+    stroke: none;
+  }
+  
+.base-timer__path-remaining {
+    stroke-width: 10px;
+    stroke-linecap: round;
+    transform: rotate(90deg);
+    transform-origin: center;
+    transition: 1s linear all;
+    fill-rule: nonzero;
+    stroke: currentColor;
+}
+  
+.base-timer__path-remaining.blu {
+    color: #00FFFF;
+}
+  
+.base-timer__path-remaining.orange {
+    color: orange;
+}
+  
+.base-timer__path-remaining.red {
+    color: red;
+}
+  
+.base-timer__label {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    top: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    color: white;
-    margin-left: 30px;
-    border: 10px solid  #00FFFF;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-
-}
-
-#countdown {
+    justify-content: center;
+    flex-direction: column;
     font-size: 40px;
-    
+    color: white;
+    text-shadow: 2px 2px 4px white;
 }
+
+#seconds {
+    position: absolute;
+    width: 130px;
+    height: 65px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 2px 2px 4px white;
+
+}
+
+#remaining {
+    position: absolute;
+    width: 130px;
+    height: 188px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 2px 2px 4px white;
+
+}
+/* fine style del timer */
+
 
 #question {
     color: white;
