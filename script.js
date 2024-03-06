@@ -105,6 +105,9 @@ let counter = 0;
 //variabile per il punteggio
 let score = 0;
 
+//varibile per timer
+let timerInterval = null;
+
 function countdown() {
   // timer 
   const FULL_DASH_ARRAY = 283;
@@ -132,7 +135,6 @@ function countdown() {
   const TIME_LIMIT = 30;
   let timePassed = 0;
   let timeLeft = TIME_LIMIT;
-  let timerInterval = null;
   let remainingPathColor = COLOR_CODES.info.color;
 
   //creiamo gli elementi html all'interno del div "timer"
@@ -163,6 +165,11 @@ function countdown() {
 </div>
 `;
 
+//pulisco l'intervallo del timer precedente prima di avviarne un altro 
+if(timerInterval !== null){
+  clearInterval(timerInterval);
+}
+
   startTimer();
 
   function onTimesUp() {
@@ -182,6 +189,8 @@ function countdown() {
 
       if (timeLeft === 0) {
         onTimesUp();
+        counter++;
+        domande();
       }
     }, 1000);
   }
@@ -307,6 +316,8 @@ function domande(){
     risposte.push(questions[counter].incorrect_answers[i]);
   }
 
+  risposte.sort(() => Math.random()- 0.5);
+
   //console.log(risposte);
 
   //creo e aggiungo al div delle answer, i vari bottoni con le varie risposte
@@ -336,10 +347,7 @@ function domande(){
   //console.log(counter);
   countdown();
 }
-
-function avvia(){
-  domande();
-}
+domande();
 
 // function incremento(){
 //   //console.log(bottoni);
