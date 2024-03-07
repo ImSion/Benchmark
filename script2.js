@@ -271,14 +271,11 @@ function domande(){
     question.classList.add("scoreResult")
     question.removeAttribute("id");
     let scoreResult = question.innerHTML = (score * 100)/counter + "%"; 
-    if(score >= 8){
-      question.innerHTML = "complimenti hai superato l'esame<br>" + scoreResult;
-      question.style.border = "10px solid #00a00d";
-    } else if (score >= 6 && score < 80){
-      question.innerHTML = "complimenti hai superato l'esame<br>" + scoreResult;
-      question.style.border = "10px solid #ffa000";
+    if(score >= 6 ){
+      question.innerHTML = "Superato!<br>" + scoreResult;
+      question.style.border = "30px solid #00a00d";
     } else if (score < 6) {
-      question.innerHTML = "sei scarso<br>" + scoreResult;
+      question.innerHTML = "Bocciato...<br>" + scoreResult;
     }
     //console.log(scoreResult);
     //console.log("esame finito");
