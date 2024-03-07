@@ -116,9 +116,9 @@ function countdown() {
   // impostiamo i secondi in cui cambia colore e diventa rosso per l'alert
   const ALERT_THRESHOLD = 7;
 
-  //settiamo le costanti colore divise per info (lightblu), warning (arancione) e alert(rosso)
+  //settiamo le costanti colore divise per inTime (lightblu), warning (arancione) e alert(rosso)
   const COLOR_CODES = {
-    info: {
+    inTime: {
       color: "blu"
     },
     warning: {
@@ -135,12 +135,12 @@ function countdown() {
   const TIME_LIMIT = 30;
   let timePassed = 0;
   let timeLeft = TIME_LIMIT;
-  let remainingPathColor = COLOR_CODES.info.color;
+  let remainingPathColor = COLOR_CODES.inTime.color;
 
   //creiamo gli elementi html all'interno del div "timer"
   document.getElementById("timer").innerHTML = `
 <div class="base-timer">
-  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <svg class="base-timer__svg" viewBox="0 0 100 100"">
     <g class="base-timer__circle">
       <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
       <path
@@ -206,14 +206,14 @@ if(timerInterval !== null){
     return `${seconds}`;
   }
 
-  // settiamo il path che ci consente che il colore della barra cambi a seconda dello stato del timer
-  // se è ancora in zona "info" sarà azzura, in zona "warning" diventerà arancione e in zona "alert" rossa
-  // i colori vengono richiamati dai rispettivi id e dalle rispettive classi css collegate alla costante COLOR_CODES
+  // Settiamo il path che permette al colore della barra di cambiare a seconda dello stato del timer
+  // se è ancora in zona "inTime" sarà azzura, in zona "warning" diventerà arancione e in zona "alert" rossa
+  // i colori vengono richiamati dai rispettivi id e dalle rispettive classi css collegate alla costante COLOR_CODES 
   function setRemainingPathColor(timeLeft) {
     const {
       alert,
       warning,
-      info
+      inTime
     } = COLOR_CODES;
     if (timeLeft <= alert.threshold) {
       document
@@ -225,7 +225,7 @@ if(timerInterval !== null){
     } else if (timeLeft <= warning.threshold) {
       document
         .getElementById("base-timer-path-remaining")
-        .classList.remove(info.color);
+        .classList.remove(inTime.color);
       document
         .getElementById("base-timer-path-remaining")
         .classList.add(warning.color);
@@ -251,29 +251,6 @@ if(timerInterval !== null){
 
 
 console.log(counter);
-
-// let verifica= false;
-// let boxCheck = document.querySelector(".fa-solid") 
-// //boxCheck.style.color= "transparent"
-// function check() {  
-//     if(boxCheck.style.color =="transparent") {  //controlla se non è stato impostato un colore
-//         boxCheck.style.color = "green" //se non è stato impostato allora metti questo
-//         verifica= true;
-//     } else {
-//         boxCheck.style.color = "transparent" //se è stato impostato toglilo.
-//         verifica = false;
-//     }
-// }
-
-// function procedi() {
-//     if (verifica) {
-//         location.href = "benchmark.html";
-
-//     } else {
-//         alert("You must click on the checkBox before moving forward")
-//     }
-// }
-
 
 //Box per le domande
 
@@ -307,15 +284,6 @@ function domande(){
 
   //facciamo un array con le risposte al suo interno
   let risposte = [];
-
-  //controllo per vedere se esistono più risposte corrette, NB: nelle correct answer viene passata una stringa, non un array di stringhe. Ciò accade solo per le incorrect answer, perciò dobbiamo prendere per certo che la risposta esatta sia solo una.
-  // if(questions[counter].correct_answer.length < 1) {
-  //   for(let i = 0; i < questions[counter].correct_answer.length; i++) {
-  //     risposte.push(questions[counter].correct_answer[i]);
-  //   }
-  // } else {
-  //   risposte.push(questions[counter].correct_answer);
-  // }
 
   risposte.push(questions[counter].correct_answer);
 

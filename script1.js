@@ -1,4 +1,4 @@
-let verifica= false;
+let verifica = false;
 let boxCheck = document.querySelector(".fa-solid") 
 boxCheck.style.color= "transparent"
 function check() {  
