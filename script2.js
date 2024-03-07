@@ -269,11 +269,19 @@ function domande(){
     let question = document.getElementById("question");
     //question.innerHTML = "Esame finito, il tuo risultato è di: " + score + " risposte esatte su " + counter;
     question.classList.add("scoreResult")
-    let scoreResult = question.innerHTML =  (score * 100)/counter + "%";
-    console.log(scoreResult);
+    question.removeAttribute("id");
+    let scoreResult = question.innerHTML = (score * 100)/counter + "%"; 
+    if(score >= 8){
+      question.innerHTML = "complimenti hai superato l'esame<br>" + scoreResult;
+    } else if (score >= 6 && score < 80){
+      question.innerHTML = "complimenti hai superato l'esame<br>" + scoreResult;
+    } else if (score < 6) {
+      question.innerHTML = "sei scarso<br>" + scoreResult;
+    }
+    //console.log(scoreResult);
     //console.log("esame finito");
     let timer = document.getElementById("timer")
-    timer.remove();
+    timer.style.display = "none";
     let footer1 = document.getElementById("questioncounter");
     footer1.remove();
     //location.href = "end.html";

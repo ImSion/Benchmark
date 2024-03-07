@@ -247,3 +247,17 @@ ul li {
     cursor: pointer;
     
 }
+
+.scoreResult {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 10px solid red;
+    color: white;
+    margin-top: 30px;
+    margin-right: 50px;
+    margin-left: 50px;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+}
