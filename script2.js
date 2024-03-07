@@ -97,7 +97,8 @@ const questions = [
       incorrect_answers: ["Python", "C", "Jakarta"],
     },
   ];
-
+//randomizzo le domande
+questions.sort(() => Math.random()- 0.5);
   
 //variabile per le domande
 let counter = 0; 
@@ -267,6 +268,7 @@ function domande(){
   if(counter === questions.length){
     let question = document.getElementById("question");
     //question.innerHTML = "Esame finito, il tuo risultato è di: " + score + " risposte esatte su " + counter;
+    question.classList.add("scoreResult")
     let scoreResult = question.innerHTML =  (score * 100)/counter + "%";
     console.log(scoreResult);
     //console.log("esame finito");
@@ -274,7 +276,9 @@ function domande(){
     timer.remove();
     let footer1 = document.getElementById("questioncounter");
     footer1.remove();
+    //location.href = "end.html";
     return;
+    
   }
 
   
@@ -320,7 +324,7 @@ function domande(){
     })
   }
   let footer1 = document.getElementById("questioncounter");
-  footer1.innerHTML = "QUESTION " + (counter+1) + `<p>/${questions.length} </p>`
+  footer1.innerHTML = "QUESTION " + (counter+1) + `<p>/${questions.length}</p>`
   countdown();
 }
 domande();
