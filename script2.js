@@ -273,8 +273,10 @@ function domande(){
     let scoreResult = question.innerHTML = (score * 100)/counter + "%"; 
     if(score >= 8){
       question.innerHTML = "complimenti hai superato l'esame<br>" + scoreResult;
+      question.style.border = "10px solid #00a00d";
     } else if (score >= 6 && score < 80){
       question.innerHTML = "complimenti hai superato l'esame<br>" + scoreResult;
+      question.style.border = "10px solid #ffa000";
     } else if (score < 6) {
       question.innerHTML = "sei scarso<br>" + scoreResult;
     }
@@ -284,9 +286,7 @@ function domande(){
     timer.style.display = "none";
     let footer1 = document.getElementById("questioncounter");
     footer1.remove();
-    //location.href = "end.html";
     return;
-    
   }
 
   
