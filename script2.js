@@ -320,7 +320,7 @@ function domande(){
     })
   }
   let footer1 = document.getElementById("questioncounter");
-  footer1.innerHTML = "Question " + (counter+1) + "<p>/</p>" + "10"
+  footer1.innerHTML = "QUESTION " + (counter+1) + "<p>/10</p>"
   countdown();
 }
 domande();
