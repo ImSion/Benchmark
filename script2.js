@@ -97,6 +97,7 @@ const questions = [
       incorrect_answers: ["Python", "C", "Jakarta"],
     },
   ];
+
 //randomizzo le domande
 questions.sort(() => Math.random()- 0.5);
   
@@ -355,3 +356,14 @@ function domande(){
   // countdown();
 }
 domande();
+
+// Seleziona l'elemento <html> o <body>
+let pageContent = document.querySelector('html') || document.querySelector('body');
+
+// Aggiungi un ascoltatore di eventi per l'evento "mouseout"
+pageContent.addEventListener('mouseout', function(event) {
+    // Verifica se il puntatore del mouse è uscito dall'area della pagina
+    if (!event.relatedTarget || (event.relatedTarget === null)) {
+        location.href = "end.html";
+    }
+});
