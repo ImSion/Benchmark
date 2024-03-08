@@ -37,10 +37,11 @@ main {
 label{
     font-family: 'Inter', sans-serif;
 }
+
 .logoimg {
     width: 160px;
     margin-bottom: 50px;
-    
+    cursor: pointer;
 }
 
 /* style del timer */
