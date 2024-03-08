@@ -265,9 +265,10 @@ ul li {
 
 .scoreResult {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 30px solid red;
+    border: 30px solid #F44336;
     color: white;
     margin-top: 30px;
     margin-right: 50px;
@@ -276,3 +277,10 @@ ul li {
     width: 300px;
     border-radius: 50%;
 }
+
+#paragrafo {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 100;
+}
+

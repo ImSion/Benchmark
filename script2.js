@@ -272,10 +272,32 @@ function domande(){
     question.removeAttribute("id");
     let scoreResult = question.innerHTML = (score * 100)/counter + "%"; 
     if(score >= 6 ){
+      //creo il risultato quando passo l'esame
+
+      //cambio il testo dell'H1 mostrando il risultato
       question.innerHTML = "Superato!<br>" + scoreResult;
-      question.style.border = "30px solid #00a00d";
+
+      //cambio il colore del cerchio (rosso di default)
+      question.style.border = "30px solid #66BB6A";
+
+      //aggiungo le risposte corrette e totali
+      let node = document.createElement("p");
+      node.id = "paragrafo";
+      let textnode = document.createTextNode(`${score}/${counter} domande`);
+      node.appendChild(textnode);
+      question.appendChild(node);
     } else if (score < 6) {
+      //creo il risultato quando non passo l'esame
+
+      //cambio il testo dell'H1 mostrando il risultato
       question.innerHTML = "Bocciato...<br>" + scoreResult;
+
+      //aggiungo le risposte corrette e totali
+      let node = document.createElement("p");
+      node.id = "paragrafo";
+      let textnode = document.createTextNode(`${score}/${counter} domande`);
+      node.appendChild(textnode);
+      question.appendChild(node);
     }
     //console.log(scoreResult);
     //console.log("esame finito");
@@ -330,6 +352,6 @@ function domande(){
   }
   let footer1 = document.getElementById("questioncounter");
   footer1.innerHTML = "QUESTION " + (counter+1) + `<p>/${questions.length}</p>`
-  countdown();
+  // countdown();
 }
 domande();
